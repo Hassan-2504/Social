@@ -13,32 +13,39 @@ export const Cover = ({
   className?: string;
 }) => {
   const [hovered, setHovered] = useState(false);
-
   const ref = useRef<HTMLDivElement>(null);
-
   const [containerWidth, setContainerWidth] = useState(0);
   const [beamPositions, setBeamPositions] = useState<number[]>([]);
 
   useEffect(() => {
-    if (ref.current) {
-      setContainerWidth(ref.current?.clientWidth ?? 0);
+    const updateBeamPositions = () => {
+      if (ref.current) {
+        setContainerWidth(ref.current?.clientWidth ?? 0);
+        const height = ref.current?.clientHeight ?? 0;
+        const numberOfBeams = Math.floor(height / 10); // Adjust the divisor to control the spacing
+        const positions = Array.from(
+          { length: numberOfBeams },
+          (_, i) => (i + 1) * (height / (numberOfBeams + 1))
+        );
+        setBeamPositions(positions);
+      }
+    };
 
-      const height = ref.current?.clientHeight ?? 0;
-      const numberOfBeams = Math.floor(height / 10); // Adjust the divisor to control the spacing
-      const positions = Array.from(
-        { length: numberOfBeams },
-        (_, i) => (i + 1) * (height / (numberOfBeams + 1))
-      );
-      setBeamPositions(positions);
-    }
-  }, [ref.current]);
+    updateBeamPositions(); // Call initially
+
+    // Optional: add a resize listener if you need to dynamically update on window resize
+    window.addEventListener("resize", updateBeamPositions);
+
+    // Clean up resize listener on unmount
+    return () => window.removeEventListener("resize", updateBeamPositions);
+  }, []); // Remove ref.current from dependencies
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       ref={ref}
-      className="relative hover:bg-neutral-900  group/cover inline-block dark:bg-neutral-900 bg-neutral-100 px-2 py-2  transition duration-200 rounded-sm"
+      className="relative hover:bg-neutral-900 group/cover inline-block dark:bg-neutral-900 bg-neutral-100 px-2 py-2 transition duration-200 rounded-sm"
     >
       <AnimatePresence>
         {hovered && (
@@ -91,7 +98,6 @@ export const Cover = ({
           key={index}
           hovered={hovered}
           duration={Math.random() * 2 + 1}
-          delay={Math.random() * 2 + 1}
           width={containerWidth}
           style={{
             top: `${position}px`,
@@ -147,14 +153,12 @@ export const Cover = ({
 
 export const Beam = ({
   className,
-  delay,
   duration,
   hovered,
   width = 600,
   ...svgProps
 }: {
   className?: string;
-  delay?: number;
   duration?: number;
   hovered?: boolean;
   width?: number;
@@ -197,8 +201,7 @@ export const Beam = ({
             duration: hovered ? 0.5 : duration ?? 2,
             ease: "linear",
             repeat: Infinity,
-            delay: hovered ? Math.random() * (1 - 0.2) + 0.2 : 0,
-            repeatDelay: hovered ? Math.random() * (2 - 1) + 1 : delay ?? 1,
+            repeatDelay: hovered ? Math.random() * (2 - 1) + 1 : 0,
           }}
         >
           <stop stopColor="#2EB9DF" stopOpacity="0" />
