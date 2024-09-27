@@ -75,7 +75,7 @@ export default function Home() {
           />
         </Link>
 
-        <div className="absolute right-1/2 translate-x-1/2 transform">
+        <div className="absolute right-1/2 translate-x-1/2 transform mr-10">
           <div className="hidden md:flex gap-x-10 items-center text-gray-700 font-medium text-lg cursor-pointer">
             <Link href={"/showcase"} className="hover:text-blue-500">
               Showcase
@@ -107,7 +107,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center ml-10">
           <a
             href="tel:+923234237294"
             className="hidden lg:flex hover:text-blue-500"
@@ -117,12 +117,13 @@ export default function Home() {
             </button>
           </a>
           <Link
-            href={"/meeting"}
-            className="shadow-[inset_0_0_0_2px_#616467]
-          text-black px-10 py-4 rounded-full tracking-widest uppercase font-bold bg-[#e2e2e2]
-          hover:bg-black hover:text-blue-500 dark:text-black transition duration-200"
+            href="/meeting"
+            className="py-3 px-10 md:px-16 md:text-xl hover:bg-[#abcbff] 
+          rounded-full border-2 border-black dark:border-white bg-[#121212] text-white 
+          transition duration-200 hover:shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] 
+          dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
           >
-            Contact Us
+            Book Call
           </Link>
         </div>
       </Element>
@@ -145,7 +146,7 @@ export default function Home() {
           transition duration-200 hover:shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] 
           dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
           >
-            Book a Call
+            Book Call
           </Link>
 
           <Link
