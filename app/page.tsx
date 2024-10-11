@@ -108,14 +108,6 @@ export default function Home() {
         </div>
 
         <div className="flex items-center ml-10">
-          <a
-            href="tel:+923234237294"
-            className="hidden lg:flex hover:text-blue-500"
-          >
-            <button className="px-4 py-2 rounded-md flex items-center">
-              (+92)-323-4237294
-            </button>
-          </a>
           <Link
             href="/meeting"
             className="py-3 px-10 md:px-16 md:text-xl hover:bg-[#abcbff] 
